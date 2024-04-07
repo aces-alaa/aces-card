@@ -77,15 +77,16 @@
             document.getElementById("recipientName").textContent = recipientName;
             document.getElementById("saveButton").remove();
             html2canvas(document.querySelector(".card"), {
-                scale: 6, // Increase scale for higher resolution
-                logging: true, // Enable logging for troubleshooting
-                dpi: 2400, // Set DPI for higher resolution
-            }).then(function(canvas) {
-                var link = document.createElement('a');
-                link.href = canvas.toDataURL("image/png");
-                link.download = 'greeting_card.png';
-                link.click();
-            });
+            scale: 6, // Increase scale for higher resolution
+            logging: true, // Enable logging for troubleshooting
+            dpi: 2400, // Set DPI for higher resolution
+            backgroundColor: null // Set background color to null to match page background
+        }).then(function(canvas) {
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL("image/png");
+            link.download = 'greeting_card.png';
+            link.click();
+        });
         }
     </script>
 </body>
