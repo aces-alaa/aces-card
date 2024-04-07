@@ -5,8 +5,9 @@
     <style>
         body {
             font-family: 'Janna LT', sans-serif;
-            @import url(https://db.onlinewebfonts.com/c/dee436f274c410c23fc3de43367ef1ae?family=Janna+LT); 
+            background-color: #1e2d5a; /* Set background color */
             padding: 20px;
+            margin: 0; /* Remove default margin */
         }
 
         .card {
@@ -66,15 +67,26 @@
             <span id="recipientName"></span>
             <br><br>
         </div>
-        <a class="button" id="printButton" href="javascript:printCard();">Print</a>
+        <a class="button" id="saveButton" href="javascript:saveCard();">Create</a>
     </div>
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
-        function printCard() {
+        function saveCard() {
             var recipientName = prompt("Enter the recipient's name:");
             document.getElementById("recipientName").textContent = recipientName;
-            document.getElementById("printButton").remove();
-            window.print();
+            document.getElementById("saveButton").remove();
+            html2canvas(document.querySelector(".card"), {
+            scale: 6, // Increase scale for higher resolution
+            logging: true, // Enable logging for troubleshooting
+            dpi: 2400, // Set DPI for higher resolution
+            backgroundColor: null // Set background color to null to match page background
+        }).then(function(canvas) {
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL("image/png");
+            link.download = 'greeting_card.png';
+            link.click();
+        });
         }
     </script>
 </body>
